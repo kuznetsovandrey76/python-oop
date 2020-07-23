@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./vs2015.css">
+    <script src="./highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+    <pre><code class="lang:python decode:true">
+    # ООП на Python. ЗАЧЕМ?
+
+    # ООП предлагает эффективный подход к программированию, при котором  
+    # мы разлагаем программный код на составляющие, чтобы уменьшить его  
+    # избыточность, и пишем  новые  программы, адаптируя имеющийся
+    # программный код, а не изменяя его. Марк Лутц 
+    </code></pre>
+
+    <pre><code class="lang:python decode:true">
+    # Создание класс    
+
+    # Основное  назначение  классов  состоит  в том, чтобы  создавать   
+    # и манипулировать новыми объектами, а кроме того, они поддерживают  
+    # механизм наследования
+
+    # Классы играют роль фабрик экземпляров. 
+    # Их атрибуты обеспечивают поведение – данные и функции
+
+    class Intern:
+        # поля и методы класса Intern
+        pass    
+    </code></pre>
+
+    <pre><code class="lang:python decode:true">
+    # Переменные в классе. Область видимости и доступ к ним
+    
+    class Intern:
+        x   = 'public'
+        _y  = "protected"
+        __z = "private"
+
+        def __init__(self):
+            self.a   = 'public'
+            self._b  = "protected" # На уровне соглашений
+            self.__c = "private" 
+
+    >>> Intern.x # public
+    >>> Intern._y # protected
+    >>> Intern.__z # AttributeError: type object 'Intern' has no attribute '__z'
+    # but
+    >>> Intern._Intern__z # private 
+    >>> dir(Intern) # ['_Intern__z', ...
+
+    me = Intern()
+    me.a # public
+    me._b # protected
+    me.__c # AttributeError: 'Intern' object has no attribute '__c'
+    me._Intern__c # private
+    </code></pre>
+
+    <pre><code class="lang:python decode:true">
+    class Intern:
+        role = "Intern"
+
+        def __init__(self, direction):
+            self.direction = direction
+
+    # Экземпляры представляют конкретные элементы программы. Их атрибуты хранят данные, 
+    # которые могут отличаться в конкретных объектах 
+
+    andrey = Intern("backend")
+    ivan = Intern("frontend")
+
+    >>> andrey.role # Intern
+    >>> ivan.role # Intern
+    >>> andrey.direction # backend
+    >>> ivan.direction # frontend
+
+    # Метод __init__  известен как конструктор, так как он запускается на этапе конструирования экземпляра. 
+    # Этот метод является типичным представителем большого класса методов, которые называются методами 
+    # перегрузки операторов. 
+
+    # SELF
+
+    # Операции присваивания значений атрибутам через ссылку self в методах создают атрибуты в каждом  отдельном 
+    # экземпляре. Методы класса получают в первом аргументе (с именем self в соответствии с соглашениями) ссылку 
+    # на обрабатываемый объект экземпляра – присваивание атрибутам через ссылку self создает или изменяет данные
+    # экземпляра, а не класса
+
+    # self – это имя, которое  обычно  дается  первому  (самому  левому)  аргументу в методах классов. 
+    # Интерпретатор Python автоматически записывает в него объект экземпляра, который подразумевается при вызове
+    # метода 
+    </code></pre>
+
+    <pre><code class="lang:python decode:true">
+    ИНКАПСУЛЯЦИЯ, НАСЛЕДОВАНИЕ, ПОЛИМОРФИЗМ
+    </code></pre>
+    
+    <pre><code class="lang:python decode:true">
+    # Инкапсуляция
+    </code></pre>
+
+    <pre><code class="lang:python decode:true">
+    # Наследование
+    class Person:
+        isPerson = True
+
+    class Intern(Person):
+        isIntern = True
+
+    >>> intern = Intern()
+    >>> intern.isPerson # True
+    >>> intern.isPerson # True
+    </code></pre>
+
+    <pre><code class="lang:python decode:true">
+    # Полиморфизм
+    </code></pre>
+
+    <pre><code class="lang:python decode:true">
+    </code></pre>
+</body>
+</html>
