@@ -297,7 +297,27 @@
     >>> me.details("Akvelon")
     Andrey works in the Akvelon
     </code></pre>
+    
+    <pre><code class="lang:python decode:true">
+    class Rectangle:
+        def __init__(self, length, width):
+            self.length = length
+            self.width = width
 
+        def area(self):
+            return self.length * self.width
+
+        def perimeter(self):
+            return 2 * self.length + 2 * self.width
+
+    class Square(Rectangle):
+        def __init__(self, length):
+            super().__init__(length, length)
+
+    square = Square(4)
+    >>> square.area() # 16
+    </code></pre>
+    
     <em>Доп. Abstract method, Множественное наследование</em>
 
     <h2>Полиморфизм</h2>
