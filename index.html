@@ -7,43 +7,72 @@
     <link rel="stylesheet" href="./vs2015.css">
     <script src="./highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <style>
+        body { width: 100% ; padding: 10px;}
+        * { font-family: 'Comfortaa', cursive; box-sizing: border-box;}
+        .c-tomato { color: tomato; }
+    </style>
 </head>
 <body>
+    <h1>ООП на Python. ЗАЧЕМ?</h1>
+
+    <p>ООП предлагает эффективный подход к программированию, при котором  
+         мы разлагаем программный код на составляющие (прим. классы), <span class="c-tomato">чтобы уменьшить его  
+         избыточность</span>, и пишем  новые  программы, адаптируя имеющийся
+         программный код, а не изменяя его. Марк Лутц </p>
+
+
+    <h2>Создание классов</h2>    
+    <p>Основное  назначение  классов  состоит  в том, чтобы  создавать 
+        и манипулировать новыми объектами. Классы играют роль фабрик экземпляров. 
+    </p>
+
     <pre><code class="lang:python decode:true">
-    # ООП на Python. ЗАЧЕМ?
-
-    # ООП предлагает эффективный подход к программированию, при котором  
-    # мы разлагаем программный код на составляющие, чтобы уменьшить его  
-    # избыточность, и пишем  новые  программы, адаптируя имеющийся
-    # программный код, а не изменяя его. Марк Лутц 
-    </code></pre>
-
-    <pre><code class="lang:python decode:true">
-    # Создание класс    
-
-    # Основное  назначение  классов  состоит  в том, чтобы  создавать   
-    # и манипулировать новыми объектами, а кроме того, они поддерживают  
-    # механизм наследования
-
-    # Классы играют роль фабрик экземпляров. 
-    # Их атрибуты обеспечивают поведение – данные и функции
-
     class Intern:
-        # поля и методы класса Intern
-        pass    
+        # атрибуты и методы класса Intern
+        pass   
+        
+    me = Intern() # экземпляр класса
     </code></pre>
 
     <pre><code class="lang:python decode:true">
-    # Переменные в классе. Область видимости и доступ к ним
+    class Intern:
+        role = "Intern"
+    
+        def getRole(self):
+            return self.role
+        
+    me = Intern()
+
+    >>> me.getRole() # Intern
+
+    >>> me.role # Intern !!! Инкапсуляция
+    </code></pre>
+
+    <pre><code class="lang:python decode:true">
+    ИНКАПСУЛЯЦИЯ, НАСЛЕДОВАНИЕ, ПОЛИМОРФИЗМ
+    </code></pre>
+
+    <h2>Инкапсуляция</h2>
+    <ul>
+        <li>связь данных с методами которые этими данными управляют;</li>
+        <li>набор инструментов для управления доступом к данным или методам которые управляют этими данными.</li>
+    </ul>
+
+    <pre><code class="lang:python decode:true">
+    # Атрибыту (переменные) в классе. Область видимости и доступ к ним
     
     class Intern:
-        x   = 'public'
-        _y  = "protected"
+        """This is Intern class"""
+        x   = 'public var'
+        _y  = "protected" # На уровне соглашений
         __z = "private"
 
+        # Contructor
         def __init__(self):
             self.a   = 'public'
-            self._b  = "protected" # На уровне соглашений
+            self._b  = "protected" 
             self.__c = "private" 
 
     >>> Intern.x # public
@@ -60,15 +89,18 @@
     me._Intern__c # private
     </code></pre>
 
+    <p>Экземпляры представляют конкретные элементы программы.
+        Их атрибуты хранят данные, 
+        которые могут отличаться в конкретных объектах </p>
+
     <pre><code class="lang:python decode:true">
     class Intern:
+        """This is Intern class"""
         role = "Intern"
 
         def __init__(self, direction):
             self.direction = direction
 
-    # Экземпляры представляют конкретные элементы программы. Их атрибуты хранят данные, 
-    # которые могут отличаться в конкретных объектах 
 
     andrey = Intern("backend")
     ivan = Intern("frontend")
@@ -77,33 +109,142 @@
     >>> ivan.role # Intern
     >>> andrey.direction # backend
     >>> ivan.direction # frontend
-
-    # Метод __init__  известен как конструктор, так как он запускается на этапе конструирования экземпляра. 
-    # Этот метод является типичным представителем большого класса методов, которые называются методами 
-    # перегрузки операторов. 
-
-    # SELF
-
-    # Операции присваивания значений атрибутам через ссылку self в методах создают атрибуты в каждом  отдельном 
-    # экземпляре. Методы класса получают в первом аргументе (с именем self в соответствии с соглашениями) ссылку 
-    # на обрабатываемый объект экземпляра – присваивание атрибутам через ссылку self создает или изменяет данные
-    # экземпляра, а не класса
-
-    # self – это имя, которое  обычно  дается  первому  (самому  левому)  аргументу в методах классов. 
-    # Интерпретатор Python автоматически записывает в него объект экземпляра, который подразумевается при вызове
-    # метода 
     </code></pre>
 
+    <h2>__init__</h2>
+    <p>
+    Метод __init__  известен как конструктор, так как он запускается на этапе конструирования экземпляра. 
+    Этот метод является типичным представителем большого класса методов, которые называются методами 
+    перегрузки операторов. 
+    </p>
+
     <pre><code class="lang:python decode:true">
-    ИНКАПСУЛЯЦИЯ, НАСЛЕДОВАНИЕ, ПОЛИМОРФИЗМ
+    class Intern:
+        pass
+    
+    >>> dir(Intern) # Возвращает список всех членов в указанном объекте
     </code></pre>
     
-    <pre><code class="lang:python decode:true">
-    # Инкапсуляция
-    </code></pre>
+    <p>['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', 
+        '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', 
+        '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', 
+        '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', 
+        '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 
+        '__weakref__']</p>
+    
+    <ul>
+        <li>__repr__(self) - возвращает однозначное текстовое представление (representation) объекта полезное для отладки</li>
+        <li>__str__(self) - вызывается функциями str, print и format. Имеет смысл определять для объектов, для которых существует «естественное» человеко-читаемое (неспецифичное для Питона) представление</li>
+    </ul>
+    <a href="https://ru.stackoverflow.com/questions/534440/%D0%A7%D0%B5%D0%BC-%D0%BE%D1%82%D0%BB%D0%B8%D1%87%D0%B0%D0%B5%D1%82%D1%81%D1%8F-repr-%D0%BE%D1%82-str">stackoverflow</a>
+
 
     <pre><code class="lang:python decode:true">
-    # Наследование
+    class Rectangle:
+        """This is Rectangle class"""
+
+        def __init__(self, width, height):
+            self.width = width
+            self.height = height
+        
+        def __repr__(self):
+            return 'Rectangle({}, {})'.format(self.width, self.height)
+        
+        def __str__(self):
+            return '({}, {})'.format(self.width, self.height)
+        
+    >>> rectangle = Rectangle(3, 4)
+    >>> rectangle
+    Rectangle(3, 4)
+    >>> print(rectangle)
+    (3, 4) 
+    </code></pre>
+    
+    <h2>self</h2>
+
+    <p>Методы класса получают в первом аргументе <span class="c-tomato">(с именем self в соответствии с соглашениями)</span> ссылку 
+        на обрабатываемый объект экземпляра – присваивание атрибутам через ссылку self создает или изменяет данные
+        экземпляра, а не класса</p>
+    <p><span class="c-tomato">self – общепринятое имя для ссылки на объект, в контексте которого вызывается метод. Этот параметр обязателен и отличает
+        метод класса от обычной функции</span></p>
+
+    <img src="self.png" alt="self-python" style="display: block; width: 50%; margin: 0 auto;">
+
+    <pre><code class="lang:python decode:true">
+    class Rectangle:
+        """This is Rectangle class"""
+
+        def __init__(self, width, height):
+            self.width = width
+            self.height = height
+        
+        def getWidth(self):        
+            return self.width
+            
+        def getHeight(self):        
+            return self.height
+        
+        def getArea(self):
+            return self.width * self.height     
+                
+    >>> r1 = Rectangle(10, 5)    
+    >>> r1.detArea() # 50
+    </code></pre>
+
+    <img src="instance.png" alt="instance-python" style="display: block; width: 50%; margin: 0 auto;">
+
+    <h2>Default attributes</h2>
+   
+    <pre><code class="lang:python decode:true">
+        class Person :
+
+        def __init__ (self, name, gender = "Male" ):
+            self.name = name
+            self.gender= gender
+        
+        def showInfo(self):
+            return f"Name: {self.name}. Gender: {self.gender}"
+    
+    >>> anna = Person("Anna", "Female")
+    >>> tom = Person("Tom")
+    
+    >>> anna.showInfo() # Name: Anna. Gender: Female
+    >>> tom.showInfo() # Name: Tom. Gender: Male
+    </code></pre>
+
+    <em>Доп. Встроенные декораторы: @classmethod, @staticmethod, @property</em><br>
+    <em>Доп. __getattr__, __setattr__</em>
+
+    <pre><code class="lang:python decode:true">
+    class C(object):
+        @classmethod
+        def fun(cls, arg1, arg2, ...):
+           ....
+    # Для создания фабричных методов. Методы фабрики возвращают объект 
+    # класса (аналог конструктора) для разных вариантов использования.
+
+    class C(object):
+        @staticmethod
+        def fun(arg1, arg2, ...):
+            ...
+    #  Для создания служебных функций.
+    </code></pre>
+
+    <h2>Наследование</h2>
+
+    <p>Наследование — это механизм, который используется для создания 
+        <span class='c-tomato'>иерархий связанных классов</span>. Эти связанные
+         классы будут иметь общий интерфейс, который будет определен в 
+         базовых классах. Производные классы могут специализировать интерфейс,
+          предоставляя конкретную реализацию, где это применимо.</p>
+
+    <ul>
+        <li>Классы, из которых получены другие классы, называются базовыми классами или суперклассами.</li>
+        <li>Классы, которые наследуются от другого, называются производными классами, подклассами или подтипами.</li>
+        <li>Считается, что производный класс порождает, наследует или расширяет базовый класс.</li>
+    </ul>
+
+    <pre><code class="lang:python decode:true">
     class Person:
         isPerson = True
 
@@ -116,10 +257,106 @@
     </code></pre>
 
     <pre><code class="lang:python decode:true">
-    # Полиморфизм
+    class Animal :  
+        def move(self):
+            return "moving ..."
+    
+        def sleep(self):
+            return "sleeping ..."
+    
+    
+    class Cat(Animal): 
+        def __init__(self, name, age):
+            self.name = name 
+            self.age = age 
+            
+        def showInfo(self):
+            return f"Name: {self.name}. Age: {self.age}"
+    
+    >>> cat = Cat("Alisa", 3)   
+    >>> cat.showInfo() # Name: Alisa. Age: 3
+    >>> cat.move() # moving ...
+    >>> cat.sleep() # sleeping ...
     </code></pre>
 
     <pre><code class="lang:python decode:true">
+    class Person :  
+        def __init__(self, name):
+            self.name = name  
+
+        def getName(self):
+            return self.name        
+
+    class Employee(Person): 
+        def details(self, company):
+            return f"{self.name} works in the {company}"
+
+    me = Employee("Andrey") 
+    >>> me.getName() 
+    Andrey
+    >>> me.details("Akvelon")
+    Andrey works in the Akvelon
     </code></pre>
+
+    <em>Доп. Abstract method, Множественное наследование</em>
+
+    <h2>Полиморфизм</h2>
+
+    <p>Классы не обязательно должны быть связанны наследованием.
+         Полиморфизм как один из ключевых элементов ООП существует независимо 
+         от наследования. Классы могут быть не родственными, но иметь одинаковые
+          методы.</p>
+
+    <p><span class="c-tomato">Полиморфизм дает возможность реализовывать так называемые единые 
+        интерфейсы для объектов различных классов.</span> Например, разные классы
+         могут предусматривать различный способ вывода той или иной информации 
+         объектов. Однако одинаковое название метода вывода позволит не запутать 
+         программу, сделать код более ясным.</p>
+
+    <pre><code class="lang:python decode:true">
+    class English:
+        def greeting(self):       
+            return "Hello"
+            
+    class French:
+        def greeting(self):
+            return "Bonjour"
+    
+    def intro(language):               
+        language.greeting()
+        
+    >>> flora  = English()
+    >>> aalase = French()   
+    
+    >>> intro(flora)
+    Hello
+    >>> intro(aalase)
+    Bonjour
+    </code></pre>
+
+    <em>Доп. Модули. Пакеты</em>
+
+    <h2>Преимущества ООП</h2>
+
+    <ul>
+        <li>Возможность легкой модификации (при грамотном анализе и проектировании)</li>
+        <li>Допустимо динамическое изменение и добавление атрибутов классов.</li>
+        <li>Жизненным циклом объекта можно управлять.</li>
+        <li>«Более естественная» декомпозиция программного обеспечения, которая существенно облегчает его разработку.</li>
+        <li>Для скрытия внутренних данных используются синтаксические соглашения.</li>
+        <li>Увеличивается показатель повторного использования кода.</li>
+        <li>Поддерживается наследование.</li>
+    </ul>
+        
+    <h2>Недостатки ООП</h2>
+    
+    <ul>
+        <li>Требуется другая квалификация</li>
+        <li>Резко увеличивается время на анализ и проектирование систем</li>
+        <li>Размер кода увеличивается</li>
+        <li>Сложность распределения работ на начальном этапе</li>
+        <li>Себестоимость больше</li>
+    </ul>
+
 </body>
 </html>
